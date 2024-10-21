@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "806376223644",
-    "project_id": "auth-biometria",
-    "storage_bucket": "auth-biometria.appspot.com"
+    "project_number": "66082380269",
+    "project_id": "auth-biometria-a3f15",
+    "storage_bucket": "auth-biometria-a3f15.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:806376223644:android:0e205ad5be6d0dda1d0e59",
+        "mobilesdk_app_id": "1:66082380269:android:f00d6881bf17c6e046afe4",
         "android_client_info": {
-          "package_name": "com.br.authbiometria"
+          "package_name": "com.example.auth_biometria"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC1VCP4nlDIoWIyZRnQKV5Gu9ljGvjsQaQ"
+          "current_key": "AIzaSyCtSbXIzga3lScTwLuebIz9YNtLoRHjKpg"
         }
       ],
       "services": {
