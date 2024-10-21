@@ -50,21 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCK-2by6G-C7yNpEQ3cVsM4IkF07HnYats',
-    appId: '1:806376223644:web:567d6edce6bd79db1d0e59',
-    messagingSenderId: '806376223644',
-    projectId: 'auth-biometria',
-    authDomain: 'auth-biometria.firebaseapp.com',
-    storageBucket: 'auth-biometria.appspot.com',
-    measurementId: 'G-KMQ885YDSQ',
+    apiKey: 'AIzaSyC3pEvr5c6dRVDL0-Tuba8c5PHXE85s3eI',
+    appId: '1:522726353627:web:21df33bb0d470cc299bafe',
+    messagingSenderId: '522726353627',
+    projectId: 'auth-biometriazz',
+    authDomain: 'auth-biometriazz.firebaseapp.com',
+    storageBucket: 'auth-biometriazz.appspot.com',
+    measurementId: 'G-HRPXGSHNXZ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC1VCP4nlDIoWIyZRnQKV5Gu9ljGvjsQaQ',
-    appId: '1:806376223644:android:874c647a29185e921d0e59',
-    messagingSenderId: '806376223644',
-    projectId: 'auth-biometria',
-    storageBucket: 'auth-biometria.appspot.com',
+    apiKey: 'AIzaSyCeU5eii5V6hmX2WyPqmNrp0Q42PNKrSfI',
+    appId: '1:522726353627:android:890e107b463636de99bafe',
+    messagingSenderId: '522726353627',
+    projectId: 'auth-biometriazz',
+    storageBucket: 'auth-biometriazz.appspot.com',
   );
-
 }
