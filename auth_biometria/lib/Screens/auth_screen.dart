@@ -1,68 +1,60 @@
-import 'package:auth_biometria/home.dart';
+import 'package:auth_biometria/Service/acesso_log_service.dart';
+import 'package:auth_biometria/Service/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:local_auth/local_auth.dart'; // Import necessário para biometria
+import 'package:auth_biometria/Screens/home_screen.dart';
+import 'package:auth_biometria/Service/auth_service.dart';
+import 'package:auth_biometria/Service/acesso_log_service.dart';
+import 'package:auth_biometria/Controller/loc_checker.dart';
 
 class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
+
   @override
-  _AuthScreenState createState() => _AuthScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final LocalAuthentication auth = LocalAuthentication(); // Inicializando para usar biometria
-
   String? _errorMessage;
 
-  // Função para realizar o login
-  Future<void> _login() async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      setState(() {
-        _errorMessage = null;
-      });
-      // Login bem-sucedido, redireciona para a tela Home
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Home()),
-      );
-    } catch (e) {
-      setState(() {
-        _errorMessage = 'Erro no login: $e';
-      });
-    }
-  }
+  final AuthService _authService = AuthService();
+  final AccessLogService _accessLogService = AccessLogService();
 
-  // Função para autenticação biométrica
+  // Função para autenticação biométrica e login
   Future<void> _authenticateAndLogin() async {
-    try {
-      final bool canAuthenticateWithBiometrics =
-          await auth.canCheckBiometrics || await auth.isDeviceSupported();
+    LocationChecker locationChecker = LocationChecker();
+    bool isInRestrictedArea = await locationChecker.isWithinRestrictedArea();
 
-      if (canAuthenticateWithBiometrics) {
-        final bool didAuthenticate = await auth.authenticate(
-          localizedReason: 'Autentique-se para fazer login',
-          options: const AuthenticationOptions(biometricOnly: true),
-        );
-
+    if (isInRestrictedArea) {
+      try {
+        bool didAuthenticate = await _authService.authenticateWithBiometrics();
         if (didAuthenticate) {
-          // Após autenticação biométrica bem-sucedida, realiza o login com email e senha
-          await _login();
+          await _authService.login(
+            _emailController.text,
+            _passwordController.text,
+          );
+          await _accessLogService.registrarAcesso(true); // Acesso permitido
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        } else {
+          setState(() {
+            _errorMessage = 'Autenticação biométrica falhou.';
+          });
+          await _accessLogService.registrarAcesso(false); // Falha na biometria
         }
-      } else {
+      } catch (e) {
         setState(() {
-          _errorMessage = 'Biometria não disponível no dispositivo.';
+          _errorMessage = e.toString();
         });
       }
-    } catch (e) {
+    } else {
       setState(() {
-        _errorMessage = 'Erro na autenticação biométrica: $e';
+        _errorMessage = 'Você não está na área restrita.';
       });
+      await _accessLogService.registrarAcesso(false); // Acesso negado pela localização
     }
   }
 
@@ -91,7 +83,7 @@ class _AuthScreenState extends State<AuthScreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color(0xFF1C3A57), // Fundo azul escuro
-                labelText: 'Usuario',
+                labelText: 'Email',
                 labelStyle: const TextStyle(color: Colors.white), // Texto do label em branco
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -126,7 +118,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 height: 80,
                 width: 80,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFF1C3A57),
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
