@@ -1,4 +1,5 @@
 import 'package:auth_biometria/Screens/auth_screen.dart';
+import 'package:auth_biometria/Screens/detalhes_carros_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Screens/home_screen.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AuthScreen(),
+      home: HomeScreen(),
     );
   }
 }

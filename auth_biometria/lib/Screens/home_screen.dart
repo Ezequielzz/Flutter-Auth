@@ -1,18 +1,12 @@
+import 'dart:convert';
+
+import 'package:auth_biometria/Model/carro_forte.dart';
+import 'package:auth_biometria/Screens/config_screen.dart';
+import 'package:auth_biometria/Screens/detalhes_carros_screen.dart';
+import 'package:auth_biometria/Screens/mapa_screen.dart';
 import 'package:auth_biometria/Service/auth_service.dart';
 import 'package:flutter/material.dart';
-
-class CarroForte {
-  final String id;
-  final String rota;
-  final String destino;
-  final String status;
-
-  CarroForte(
-      {required this.id,
-      required this.rota,
-      required this.destino,
-      required this.status});
-}
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,38 +14,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0; // Controla qual página está ativa
+  int _selectedIndex = 0;
 
+  // Adiciona o método fetchCarrosFortes no _HomeScreenState
+  Future<List<CarroForte>> fetchCarrosFortes() async {
+    final jsonData = await rootBundle.loadString('assets/data/carrosFortes.json');
+    final List<dynamic> data = json.decode(jsonData)['carrosFortes'];
+    return data.map((carro) => CarroForte.fromJson(carro)).toList();
+  }
 
-  final List<CarroForte> carrosFortes = [
-    CarroForte(
-        id: 'CF001',
-        rota: 'Rota 1',
-        destino: 'Banco Central',
-        status: 'Em trânsito'),
-    CarroForte(
-        id: 'CF002',
-        rota: 'Rota 2',
-        destino: 'Agência Cidade Norte',
-        status: 'Aguardando saída'),
-    CarroForte(
-        id: 'CF003',
-        rota: 'Rota 3',
-        destino: 'Agência Sul',
-        status: 'Finalizado'),
-  ];
-
-  // Diferentes telas para navegação
-  static List<Widget> _pages = <Widget>[
-    HomeContent(), // Página principal com os carros fortes
-    MapaScreen(), // Página Mapa (por exemplo)
-    ConfigScreen() // Página de configurações
+  // Modifica _pages para que HomeContent receba fetchCarrosFortes como um Future
+  List<Widget> _pages() => <Widget>[
+    HomeContent(carrosFortes: fetchCarrosFortes()), // Passa o Future para HomeContent
+    MapaScreen(),
+    ConfigScreen(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex =
-          index; // Atualiza a tela ativa com base no índice da barra
+      _selectedIndex = index;
     });
   }
 
@@ -62,14 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF0B1E36),
         title: Image.asset(
-          'assets/images/biosecurity.png', // Caminho para sua imagem
-          height: 131, // Ajuste a altura da imagem para o tamanho desejado
-          fit: BoxFit.contain, // Faz com que a imagem se ajuste dentro da área designada
+          'assets/images/biosecurity.png',
+          height: 131,
+          fit: BoxFit.contain,
         ),
-        centerTitle: true, // Centraliza a imagem na AppBar
+        centerTitle: true,
       ),
-      body: _pages[_selectedIndex],
-      // Exibe a tela selecionada na barra de navegação
+      body: _pages()[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -86,201 +66,83 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        // Indica qual item está selecionado
         unselectedItemColor: Color.fromARGB(100, 107, 188, 255),
         selectedItemColor: Color.fromARGB(1480, 107, 188, 255),
         backgroundColor: const Color(0xFF0E2543),
-        onTap: _onItemTapped, // Chama ao clicar em um item
+        onTap: _onItemTapped,
       ),
     );
   }
 }
 
-// Página inicial
 class HomeContent extends StatelessWidget {
-  final List<CarroForte> carrosFortes = [
-    CarroForte(
-        id: 'CF001',
-        rota: 'Rota 1',
-        destino: 'Banco Central',
-        status: 'Em trânsito'),
-    CarroForte(
-        id: 'CF002',
-        rota: 'Rota 2',
-        destino: 'Agência Cidade Norte',
-        status: 'Aguardando saída'),
-    CarroForte(
-        id: 'CF003',
-        rota: 'Rota 3',
-        destino: 'Agência Sul',
-        status: 'Finalizado'),
-  ];
+  final Future<List<CarroForte>> carrosFortes;
+
+  HomeContent({required this.carrosFortes});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ListView.builder(
-        itemCount: carrosFortes.length,
-        itemBuilder: (context, index) {
-          final carro = carrosFortes[index];
-          return Card(
-            elevation: 4,
-            color: Color.fromARGB(148, 107, 188, 255),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16.0),
-              title: Text(
-                'Carro Forte: ${carro.id}',
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Rota: ${carro.rota}',
-                      style: TextStyle(color: Colors.white)),
-                  Text('Destino: ${carro.destino}',
-                      style: TextStyle(color: Colors.white)),
-                  Text('Status: ${carro.status}',
-                      style: TextStyle(color: Colors.white)),
-                ],
-              ),
-              trailing: Icon(
-                carro.status == 'Em trânsito'
-                    ? Icons.local_shipping
-                    : carro.status == 'Aguardando saída'
+    return FutureBuilder<List<CarroForte>>(
+      future: carrosFortes,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Erro ao carregar dados'));
+        } else if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              final carro = snapshot.data![index];
+              return Card(
+                elevation: 4,
+                color: Color.fromARGB(148, 107, 188, 255),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16.0),
+                  title: Text(
+                    'Carro Forte: ${carro.id}',
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Rota: ${carro.rota}', style: TextStyle(color: Colors.white)),
+                      Text('Destino: ${carro.destino}', style: TextStyle(color: Colors.white)),
+                      Text('Status: ${carro.status}', style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                  trailing: Icon(
+                    carro.status == 'Em trânsito'
+                        ? Icons.local_shipping
+                        : carro.status == 'Aguardando saída'
                         ? Icons.access_time
                         : Icons.check_circle,
-                color: carro.status == 'Em trânsito'
-                    ? Colors.amber
-                    : carro.status == 'Aguardando saída'
+                    color: carro.status == 'Em trânsito'
+                        ? Colors.amber
+                        : carro.status == 'Aguardando saída'
                         ? Colors.blue
                         : const Color.fromARGB(255, 14, 235, 29),
-                size: 30,
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-// Tela do Mapa (por exemplo)
-class MapaScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Tela do Mapa',
-        style: TextStyle(fontSize: 24, color: Colors.white),
-      ),
-    );
-  }
-}
-
-class ConfigScreen extends StatelessWidget {
-  final AuthService authService = AuthService();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B1E36), // Fundo azul escuro
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF0B1E36), // Mesma cor do fundo
-        centerTitle: true, // Centralizar o título
-        actions: [
-          IconButton(
-            icon: Icon(Icons.exit_to_app, color: Colors.white),
-            onPressed: () {
-              // Ação para o botão de sair
-              authService.signOut();
+                    size: 30,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetalhesCarroForteScreen(carroForteId: carro.id),
+                      ),
+                    );
+                  },
+                ),
+              );
             },
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // Item Conta
-            ListTile(
-              leading: Icon(Icons.person, color: Colors.white),
-              title: Text(
-                'Conta:',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                'Exibe as informações da sua conta',
-                style: TextStyle(color: Colors.white70),
-              ),
-              onTap: () {
-                // Ação quando clicar
-              },
-            ),
-            Divider(color: Colors.white24),
-
-            // Item Log de Usuário
-            ListTile(
-              leading: Icon(Icons.arrow_forward, color: Colors.white),
-              title: Text(
-                'Log de usuário:',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                'Exibe as informações do Log de usuário.',
-                style: TextStyle(color: Colors.white70),
-              ),
-              onTap: () {
-                // Ação quando clicar
-              },
-            ),
-            Divider(color: Colors.white24),
-
-            // Item Log de Acesso
-            ListTile(
-              leading: Icon(Icons.arrow_forward, color: Colors.white),
-              title: Text(
-                'Log de acesso:',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                'Exibe as informações do Log de acesso.',
-                style: TextStyle(color: Colors.white70),
-              ),
-              onTap: () {
-                // Ação quando clicar
-              },
-            ),
-            Divider(color: Colors.white24),
-
-            // Item Sobre
-            ListTile(
-              leading: Icon(Icons.info, color: Colors.white),
-              title: Text(
-                'Sobre:',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                'Saiba mais',
-                style: TextStyle(color: Colors.white70),
-              ),
-              onTap: () {
-                // Ação quando clicar
-              },
-            ),
-            Divider(color: Colors.white24),
-          ],
-        ),
-      ),
+          );
+        } else {
+          return Center(child: Text('Nenhum dado encontrado'));
+        }
+      },
     );
   }
 }

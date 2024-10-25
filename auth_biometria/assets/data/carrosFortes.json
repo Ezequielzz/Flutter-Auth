@@ -1,0 +1,204 @@
+{
+  "carrosFortes": [
+    {
+      "id": "CF001",
+      "rota": "Rota 1",
+      "destino": "Banco Central",
+      "status": "Finalizado",
+      "coordenadas": {
+        "latitude": -23.550520,
+        "longitude": -46.633308
+      }
+    },
+    {
+      "id": "CF002",
+      "rota": "Rota 2",
+      "destino": "Agência Cidade Norte",
+      "status": "Em trânsito",
+      "coordenadas": {
+        "latitude": -23.573900,
+        "longitude": -46.641779
+      }
+    },
+    {
+      "id": "CF003",
+      "rota": "Rota 3",
+      "destino": "Agência Sul",
+      "status": "Aguardando saída",
+      "coordenadas": {
+        "latitude": -23.561680,
+        "longitude": -46.655881
+      }
+    },
+    {
+      "id": "CF004",
+      "rota": "Rota 4",
+      "destino": "Banco Oeste",
+      "status": "Em trânsito",
+      "coordenadas": {
+        "latitude": -23.564940,
+        "longitude": -46.620643
+      }
+    },
+    {
+      "id": "CF005",
+      "rota": "Rota 5",
+      "destino": "Agência Leste",
+      "status": "Finalizado",
+      "coordenadas": {
+        "latitude": -23.548943,
+        "longitude": -46.636459
+      }
+    },
+    {
+      "id": "CF006",
+      "rota": "Rota 6",
+      "destino": "Agência Central",
+      "status": "Aguardando saída",
+      "coordenadas": {
+        "latitude": -23.569569,
+        "longitude": -46.642978
+      }
+    },
+    {
+      "id": "CF007",
+      "rota": "Rota 7",
+      "destino": "Agência Norte",
+      "status": "Em trânsito",
+      "coordenadas": {
+        "latitude": -23.561301,
+        "longitude": -46.634019
+      }
+    },
+    {
+      "id": "CF008",
+      "rota": "Rota 8",
+      "destino": "Banco do Sul",
+      "status": "Finalizado",
+      "coordenadas": {
+        "latitude": -23.575802,
+        "longitude": -46.651388
+      }
+    },
+    {
+      "id": "CF009",
+      "rota": "Rota 9",
+      "destino": "Banco Norte",
+      "status": "Aguardando saída",
+      "coordenadas": {
+        "latitude": -23.580080,
+        "longitude": -46.629210
+      }
+    },
+    {
+      "id": "CF010",
+      "rota": "Rota 10",
+      "destino": "Agência Oeste",
+      "status": "Em trânsito",
+      "coordenadas": {
+        "latitude": -23.558255,
+        "longitude": -46.662325
+      }
+    },
+    {
+      "id": "CF011",
+      "rota": "Rota 11",
+      "destino": "Banco Norte",
+      "status": "Finalizado",
+      "coordenadas": {
+        "latitude": -23.562801,
+        "longitude": -46.638324
+      }
+    },
+    {
+      "id": "CF012",
+      "rota": "Rota 12",
+      "destino": "Agência Sul",
+      "status": "Aguardando saída",
+      "coordenadas": {
+        "latitude": -23.564123,
+        "longitude": -46.661245
+      }
+    },
+    {
+      "id": "CF013",
+      "rota": "Rota 13",
+      "destino": "Banco Oeste",
+      "status": "Em trânsito",
+      "coordenadas": {
+        "latitude": -23.566982,
+        "longitude": -46.639327
+      }
+    },
+    {
+      "id": "CF014",
+      "rota": "Rota 14",
+      "destino": "Banco Central",
+      "status": "Finalizado",
+      "coordenadas": {
+        "latitude": -23.556780,
+        "longitude": -46.644234
+      }
+    },
+    {
+      "id": "CF015",
+      "rota": "Rota 15",
+      "destino": "Agência Norte",
+      "status": "Aguardando saída",
+      "coordenadas": {
+        "latitude": -23.559321,
+        "longitude": -46.653212
+      }
+    },
+    {
+      "id": "CF016",
+      "rota": "Rota 16",
+      "destino": "Agência Central",
+      "status": "Em trânsito",
+      "coordenadas": {
+        "latitude": -23.561000,
+        "longitude": -46.641123
+      }
+    },
+    {
+      "id": "CF017",
+      "rota": "Rota 17",
+      "destino": "Banco Sul",
+      "status": "Finalizado",
+      "coordenadas": {
+        "latitude": -23.563400,
+        "longitude": -46.652001
+      }
+    },
+    {
+      "id": "CF018",
+      "rota": "Rota 18",
+      "destino": "Banco Oeste",
+      "status": "Aguardando saída",
+      "coordenadas": {
+        "latitude": -23.565230,
+        "longitude": -46.630400
+      }
+    },
+    {
+      "id": "CF019",
+      "rota": "Rota 19",
+      "destino": "Agência Sul",
+      "status": "Finalizado",
+      "coordenadas": {
+        "latitude": -23.568120,
+        "longitude": -46.648320
+      }
+    },
+    {
+      "id": "CF020",
+      "rota": "Rota 20",
+      "destino": "Agência Central",
+      "status": "Em trânsito",
+      "coordenadas": {
+        "latitude": -23.562340,
+        "longitude": -46.654109
+      }
+    }
+  ]
+}

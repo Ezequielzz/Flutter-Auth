@@ -1,3 +1,4 @@
+import 'package:auth_biometria/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -41,6 +42,7 @@ class AuthService {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
+
     } catch (e) {
       print(e.toString());
     }
