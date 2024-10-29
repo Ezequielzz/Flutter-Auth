@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:auth_biometria/Service/auth_service.dart';
+import 'package:auth_biometria/Services/auth_service.dart';
 
 class ConfigScreen extends StatelessWidget {
   final AuthService authService = AuthService();

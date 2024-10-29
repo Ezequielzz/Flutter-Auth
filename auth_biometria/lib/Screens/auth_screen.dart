@@ -1,9 +1,9 @@
-import 'package:auth_biometria/Service/acesso_log_service.dart';
-import 'package:auth_biometria/Service/auth_service.dart';
+import 'package:auth_biometria/Services/acesso_log_service.dart';
+import 'package:auth_biometria/Services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:auth_biometria/Screens/home_screen.dart';
-import 'package:auth_biometria/Service/auth_service.dart';
-import 'package:auth_biometria/Service/acesso_log_service.dart';
+import 'package:auth_biometria/Services/auth_service.dart';
+import 'package:auth_biometria/Services/acesso_log_service.dart';
 import 'package:auth_biometria/Controller/loc_checker.dart';
 
 class AuthScreen extends StatefulWidget {

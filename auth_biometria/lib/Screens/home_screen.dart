@@ -4,7 +4,7 @@ import 'package:auth_biometria/Model/carro_forte.dart';
 import 'package:auth_biometria/Screens/config_screen.dart';
 import 'package:auth_biometria/Screens/detalhes_carros_screen.dart';
 import 'package:auth_biometria/Screens/mapa_screen.dart';
-import 'package:auth_biometria/Service/auth_service.dart';
+import 'package:auth_biometria/Services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

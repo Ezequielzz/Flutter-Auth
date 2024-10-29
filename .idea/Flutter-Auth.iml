@@ -33,6 +33,12 @@
       <excludeFolder url="file://$MODULE_DIR$/auth_biometriazz/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/auth_biometriazz/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/auth_biometriazz/build" />
+      <excludeFolder url="file://$MODULE_DIR$/auth_biometria/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/auth_biometria/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/auth_biometria/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/auth_biometria/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/auth_biometria/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/auth_biometria/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/example/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
