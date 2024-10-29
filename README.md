@@ -152,6 +152,12 @@ estados de carregamento e mensagens de erro amigáveis ao usuário.
 O mapa exibe os carros-fortes em tempo real, com ícones personalizados para representar sua posição
 e rota. A API OpenStreetMap é utilizada para renderizar o mapa e exibir a área restrita.
 
+#### Protótipo de Média Fidelidade
+  <div align="center">
+    <img src="/img/img2.png">
+  </div>
+
+#### Protótipo de Alta Fidelidade
   <div align="center">
     <img src="/img/img.png">
   </div>
