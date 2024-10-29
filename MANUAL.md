@@ -46,10 +46,6 @@ A tela de mapa permite que o usuário visualize a localização de todos os carr
 
 ---
 
-Aqui estão as descrições das telas no formato solicitado:
-
----
-
 ### 4. Tela de Configurações (ConfigScreen)
 
 - **Descrição**: A tela de configurações permite que o usuário acesse informações sobre a conta, visualize logs de usuário e acesso, além de acessar informações adicionais sobre o aplicativo.
