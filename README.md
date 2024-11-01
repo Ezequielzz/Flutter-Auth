@@ -176,21 +176,3 @@ e revisa os **Logs de Acesso** para monitorar eventos recentes."
 
 "Ao tentar acessar uma área restrita, o sistema verifica a localização de Maria. Se ela está na área
 permitida, o acesso é liberado, e um log é registrado automaticamente."
-
----
-
-## 6. Desafios e Soluções
-
-1. **Integração com o Firebase**:
-    - **Desafio**: Configuração inicial e autenticação segura.
-    - **Solução**: Configuração cuidadosa dos arquivos `google-services.json` e
-      `GoogleService-Info.plist`.
-
-2. **Controle de Permissões de Localização**:
-    - **Desafio**: Garantir que o aplicativo obtenha permissão do usuário para acessar a
-      localização.
-    - **Solução**: Uso das funções `checkPermission` e `requestPermission` do Geolocator.
-
-3. **Autenticação Biométrica**:
-    - **Desafio**: Compatibilidade com dispositivos que não suportam biometria.
-    - **Solução**: Implementação de verificação com `isDeviceSupported` para fallback.
